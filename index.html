@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sakset & Kärki</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #111;
+      font-family: "Fredoka", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        opacity: 0;
+        transform: scale(.92);
+      }
+      70% {
+        transform: scale(1.02);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .top {
+      max-width: 1200px;
+      margin: auto;
+      padding: 24px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: fadeIn .7s ease both;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      font-size: 15px;
+      position: relative;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: #111;
+      transition: width .25s ease;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 25px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      animation: fadeUp .8s ease both;
+    }
+
+    .eyebrow {
+      margin-bottom: 18px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(58px, 9vw, 105px);
+      line-height: .9;
+      font-weight: 700;
+      letter-spacing: -4px;
+    }
+
+    .hero-text {
+      max-width: 450px;
+      margin: 28px 0;
+      color: #666;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 21px;
+      border-radius: 30px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    }
+
+    .button:active {
+      transform: scale(.96);
+    }
+
+    .hero-image {
+      height: 570px;
+      overflow: hidden;
+      border-radius: 160px 160px 18px 18px;
+      background: #f5f3f0;
+      animation: pop 1s ease .15s both;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-image:hover img {
+      transform: scale(1.04);
+    }
+
+    section {
+      padding: 100px 25px;
+    }
+
+    .section-inner {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 45px;
+      animation: fadeUp .7s ease both;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(45px, 7vw, 75px);
+      line-height: .95;
+      font-weight: 600;
+      letter-spacing: -3px;
+    }
+
+    .section-heading p {
+      max-width: 300px;
+      margin: 0;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 20px;
+    }
+
+    .gallery-main,
+    .gallery-small {
+      overflow: hidden;
+      background: #f5f3f0;
+    }
+
+    .gallery-main {
+      min-height: 740px;
+      border-radius: 20px;
+      animation: pop .8s ease .1s both;
+    }
+
+    .gallery-side {
+      display: grid;
+      gap: 20px;
+    }
+
+    .gallery-small {
+      min-height: 360px;
+      border-radius: 20px;
+      animation: pop .8s ease .2s both;
+    }
+
+    .gallery-small:last-child {
+      animation-delay: .3s;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-main:hover img,
+    .gallery-small:hover img {
+      transform: scale(1.045);
+    }
+
+    .reviews-section {
+      background: #fff8df;
+    }
+
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .review {
+      background: #fff;
+      padding: 34px;
+      border-radius: 24px;
+      border: 2px solid #111;
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+      animation: fadeUp .7s ease both;
+    }
+
+    .review:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    .review:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 15px 30px rgba(0,0,0,.08);
+    }
+
+    .stars {
+      color: #ffc928;
+      font-size: 27px;
+      letter-spacing: 4px;
+      margin-bottom: 22px;
+      -webkit-text-stroke: 1px #111;
+      transition: transform .2s ease;
+    }
+
+    .review:hover .stars {
+      transform: scale(1.06);
+    }
+
+    .review p {
+      margin: 0 0 25px;
+      font-size: 21px;
+      line-height: 1.5;
+    }
+
+    .review-name {
+      font-size: 15px;
+      color: #777;
+    }
+
+    .contact {
+      text-align: center;
+      padding: 125px 25px;
+      animation: fadeUp .8s ease both;
+    }
+
+    .contact h2 {
+      margin: 0 0 20px;
+      font-size: clamp(52px, 8vw, 90px);
+      line-height: .9;
+      font-weight: 700;
+      letter-spacing: -4px;
+    }
+
+    .contact p {
+      color: #777;
+      margin: 0 0 30px;
+      font-size: 18px;
+    }
+
+    footer {
+      max-width: 1150px;
+      margin: auto;
+      padding: 25px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      color: #777;
+      font-size: 14px;
+      animation: fadeIn 1s ease both;
+    }
+
+    @media (max-width: 800px) {
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 50px;
+        gap: 45px;
+      }
+
+      .hero-image {
+        height: 430px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 15px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-main {
+        min-height: 500px;
+      }
+
+      .gallery-small {
+        min-height: 430px;
+      }
+
+      .reviews {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 70px 20px;
+      }
+
+      footer {
+        margin: 0 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="logo">Sakset & Kärki</div>
+
+    <nav class="nav">
+      <a href="#tyot">Työt</a>
+      <a href="#arvostelut">Arvostelut</a>
+      <a href="#yhteys">Yhteys</a>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-copy">
+
+        <div class="eyebrow">Parturi</div>
+
+        <h1>
+          Sakset<br>
+          & Kärki
+        </h1>
+
+        <p class="hero-text">
+          Siistit leikkaukset ja hyvä palvelu kaikenikäisille.
+        </p>
+
+        <a class="button" href="tel:0449879010">
+          ☎ 044 9879010
+        </a>
+
+      </div>
+
+      <div class="hero-image">
+        <img src="1.png" alt="Sakset & Kärki">
+      </div>
+    </section>
+
+
+    <section id="tyot">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <h2>Työt</h2>
+
+          <p>
+            Tutustu tehtyihin leikkauksiin ja tyyleihin.
+          </p>
+        </div>
+
+        <div class="gallery">
+
+          <div class="gallery-main">
+            <img src="2.png" alt="Hiustyö">
+          </div>
+
+          <div class="gallery-side">
+
+            <div class="gallery-small">
+              <img src="3.png" alt="Hiustyö">
+            </div>
+
+            <div class="gallery-small">
+              <img src="4.png" alt="Hiustyö">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="reviews-section" id="arvostelut">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <h2>
+            Asiakkaiden<br>
+            mielipiteitä
+          </h2>
+
+          <p>
+            Asiakkaiden antama arvosana 5 / 5.
+          </p>
+        </div>
+
+        <div class="reviews">
+
+          <article class="review">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+              Erittäin ammattitaitoinen ihminen.
+              Mukava ja ystävällinen palvelu.
+              Täydet pisteet!
+            </p>
+
+            <div class="review-name">
+              Calendula
+            </div>
+
+          </article>
+
+
+          <article class="review">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+              Hyvä palvelu ja hiukset voi hyvin :)
+              Suosittelen aikuisille ja lapsille :)
+            </p>
+
+            <div class="review-name">
+              Mervi S
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="contact" id="yhteys">
+
+      <div class="section-inner">
+
+        <div class="eyebrow">Yhteys</div>
+
+        <h2>Varaa aika.</h2>
+
+        <p>
+          Ota yhteyttä puhelimitse.
+        </p>
+
+        <a class="button" href="tel:0449879010">
+          ☎ 044 9879010
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    <span>Sakset & Kärki</span>
+    <span>044 9879010</span>
+  </footer>
+
+</body>
+  </html>
